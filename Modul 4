@@ -1,0 +1,79 @@
+import java.util.Scanner;
+import java.util.Locale;
+import java.text.NumberFormat;
+
+class Publication {
+    private String title;
+    private int price;
+    private int page;
+    
+    public Publication(String title, int price, int page){
+        this.title = title;
+        this.price = price;
+        this.page = page;
+    }
+    
+    public String getTitle(){
+        return title;
+    }
+    public void setTitle(String title){
+        this.title = title;
+    }
+    
+    public int getPrice(){
+        return price;
+    }
+    public void setPrice(int price){
+        this.price = price;
+    }
+    
+    public int getPage(){
+        return page;
+    }
+    public void setPage(int page){
+        this.page = page;
+    }
+
+    public String formatCurrency(int amount) {
+        Locale myIndonesianLocale = new Locale("in", "ID");
+        NumberFormat formatter = NumberFormat.getCurrencyInstance(myIndonesianLocale);
+        return formatter.format(amount);
+    }
+    
+    public void printBookInfo(){
+        System.out.println("Title: " + title + " | Price List: " + formatCurrency(price) + 
+        " | Jumlah Halaman: " + page);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        Publication book1 = new Publication("Three Kingdom", 5000, 300);
+        Publication book2 = new Publication("A Pie", 8400, 200);
+        
+        System.out.print("Masukkan jumlah buku " + book1.getTitle() + " yang terjual: ");
+        int jumlahBuku1 = scanner.nextInt();
+        System.out.print("Masukkan jumlah buku " + book2.getTitle() + " yang terjual: ");
+        int jumlahBuku2 = scanner.nextInt();
+        
+        int totalOmsetBuku1 = jumlahBuku1 * book1.getPrice();
+        int totalOmsetBuku2 = jumlahBuku2 * book2.getPrice();
+        int totalOmset = totalOmsetBuku1 + totalOmsetBuku2;
+        
+        System.out.println("\n==== Mencari Informasi Buku ====");
+        book1.printBookInfo();
+        book2.printBookInfo();
+        System.out.println("==================");
+        System.out.println(book1.getTitle() + " - Pembelian Jilid: " + jumlahBuku1);
+        System.out.println(book2.getTitle() + " - Pembelian Jilid: " + jumlahBuku2);
+        System.out.println("==================");
+        System.out.println(book1.getTitle() + " " + jumlahBuku1 + " jilid (" + book1.formatCurrency(totalOmsetBuku1) + ")");
+        System.out.println(book2.getTitle() + " " + jumlahBuku2 + " jilid (" + book2.formatCurrency(totalOmsetBuku2) + ")");
+        System.out.println("==================");
+        System.out.println("Jumlah total pembelian: " + book1.formatCurrency(totalOmset));
+
+        scanner.close();
+    }
+}
