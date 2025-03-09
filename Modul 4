@@ -1,3 +1,4 @@
+(Soal 1)
 import java.util.Scanner;
 import java.util.Locale;
 import java.text.NumberFormat;
@@ -75,5 +76,82 @@ public class Main {
         System.out.println("Jumlah total pembelian: " + book1.formatCurrency(totalOmset));
 
         scanner.close();
+    }
+}
+========================================================================= 
+(soal 2 )
+
+import java.text.NumberFormat;
+import java.util.Locale;
+
+class Product {
+    private String namaProduk;
+    private double harga;
+    private int stok;
+
+    public Product(String namaProduk, double harga, int stok) {
+        this.namaProduk = namaProduk;
+        this.harga = harga;
+        this.stok = stok;
+    }
+
+    public String getNamaProduk() {
+        return namaProduk;
+    }
+
+    public void setNamaProduk(String namaProduk) {
+        this.namaProduk = namaProduk;
+    }
+
+    public double getHarga() {
+        return harga;
+    }
+
+    public void setHarga(double harga) {
+        this.harga = harga;
+    }
+
+    public int getStok() {
+        return stok;
+    }
+
+    public void setStok(int stok) {
+        this.stok = stok;
+    }
+
+    public void printProductInfo() {
+        Locale myIndonesianLocale = new Locale("in", "ID");
+        NumberFormat formatter = NumberFormat.getCurrencyInstance(myIndonesianLocale);
+        System.out.println("Nama Produk: " + namaProduk);
+        System.out.println("Harga: " + formatter.format(harga));
+        System.out.println("Stok: " + stok + " unit");
+        System.out.println();
+    }
+}
+
+class ProductManager {
+    public void tampilkanInformasiProduk(Product produk) {
+        produk.printProductInfo();
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+
+        Product produk1 = new Product("Laptop", 15000000, 10);
+        Product produk2 = new Product("Mouse", 150000, 50);
+        Product produk3 = new Product("Keyboard", 300000, 30);
+
+        ProductManager manager = new ProductManager();
+
+
+        System.out.println("--- Informasi Produk 1 ---");
+        manager.tampilkanInformasiProduk(produk1);
+
+        System.out.println("--- Informasi Produk 2 ---");
+        manager.tampilkanInformasiProduk(produk2);
+
+        System.out.println("--- Informasi Produk 3 ---");
+        manager.tampilkanInformasiProduk(produk3);
     }
 }
